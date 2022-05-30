@@ -4,6 +4,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { HeroesRoutingModule } from './heroes-routing.module';
 import { MaterialModule } from '../material/material.module';
+import { FormsModule } from '@angular/forms';
 
 import { ImagenPipe } from './pipes/imagen.pipe';
 
@@ -29,6 +30,7 @@ import { HeroeTarjetaComponent } from './components/heroe-tarjeta/heroe-tarjeta.
     FlexLayoutModule,
     HeroesRoutingModule,
     MaterialModule,
+    FormsModule,
   ],
 })
 export class HeroesModule {}
