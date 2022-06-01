@@ -5,9 +5,9 @@
     <h3>Buscador</h3>
     <form fxLayout="column">
       <mat-form-field appearance="fill">
+        <mat-label>Heroe</mat-label>
         <input
           type="text"
-          placeholder="Pick one"
           matInput
           [(ngModel)]="termino"
           name="termino"
@@ -19,11 +19,24 @@
           #auto="matAutocomplete"
           (optionSelected)="opcionSeleccionada($event)"
         >
-          <mat-option *ngFor="let heroe of heroes" [value]="heroe">
-            {{ heroe.superhero }}
-          </mat-option>
+          <div *ngIf="!errorBusqueda; else noEncontrado">
+            <mat-option *ngFor="let heroe of heroes" [value]="heroe">
+              {{ heroe.superhero }}
+            </mat-option>
+          </div>
+          <ng-template #noEncontrado>
+            <mat-option [value]="">
+              No se ha encontrado {{ termino }}
+            </mat-option>
+          </ng-template>
         </mat-autocomplete>
       </mat-form-field>
     </form>
+  </div>
+  <div *ngIf="heroeSeleccionado" fxLayout="row">
+    <img
+      [src]="heroeSeleccionado | imagenPipe"
+      [routerLink]="['/heroes', heroeSeleccionado.id]"
+    />
   </div>
 </div>

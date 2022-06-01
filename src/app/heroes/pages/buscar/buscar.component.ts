@@ -6,13 +6,20 @@ import { HeroesService } from '../../services/heroes.service';
 @Component({
   selector: 'app-buscar',
   templateUrl: './buscar.component.html',
-  styles: [],
+  styles: [
+    `
+      img {
+        width: 20vw;
+        cursor: pointer;
+      }
+    `,
+  ],
 })
 export class BuscarComponent implements OnInit {
   termino: string = '';
   heroes: Heroe[] = [];
   heroeSeleccionado!: Heroe;
-  errorEnBusqueda: boolean = false;
+  errorBusqueda: boolean = false;
 
   constructor(private heroeService: HeroesService) {}
 
@@ -20,14 +27,25 @@ export class BuscarComponent implements OnInit {
 
   buscando() {
     this.heroeService.getSugerencias(this.termino).subscribe((heroes) => {
-      this.heroes = heroes;
+      if (heroes.length === 0) {
+        this.errorBusqueda = true;
+        this.heroes = [];
+      } else {
+        this.heroes = heroes;
+        this.errorBusqueda = false;
+      }
     });
   }
   opcionSeleccionada(event: MatAutocompleteSelectedEvent) {
-    const heroe: Heroe = event.option.value;
-    this.termino = heroe.superhero;
-    this.heroeService.getHeroePorId(heroe.id!).subscribe((heroe) => {
-      this.heroeSeleccionado = heroe;
-    });
+    if (!event.option.value) {
+      this.termino = '';
+      return;
+    } else {
+      const heroe: Heroe = event.option.value;
+      this.termino = heroe.superhero;
+      this.heroeService.getHeroePorId(heroe.id!).subscribe((heroe) => {
+        this.heroeSeleccionado = heroe;
+      });
+    }
   }
 }

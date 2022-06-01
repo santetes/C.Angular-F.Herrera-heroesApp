@@ -13,6 +13,9 @@ import { HeroesService } from '../../services/heroes.service';
         height: 70vh;
         border-radius: 5px;
       }
+      .todaPantalla {
+        height: 100vh;
+      }
     `,
   ],
 })
