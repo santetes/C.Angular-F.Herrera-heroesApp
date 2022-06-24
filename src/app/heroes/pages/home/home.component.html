@@ -27,7 +27,10 @@
       <mat-icon>list</mat-icon>
     </button>
     <span class="spacer"></span>
-    <button mat-icon-button>LogOut</button>
+    <span>{{ auth.usuario }}</span>
+    <button class="logOut" mat-raised-button (click)="logOut()" color="warn">
+      LogOut
+    </button>
   </mat-toolbar>
 
   <div class="container">

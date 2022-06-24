@@ -22,4 +22,13 @@ export class HeroesService {
       `${this.baseUrl}/heroes/?q=${termino}&_limit=6`
     );
   }
+  agregarHeroe(heroe: Heroe): Observable<Heroe> {
+    return this.http.post<Heroe>(`${this.baseUrl}/heroes`, heroe);
+  }
+  actualizarHeroe(heroe: Heroe): Observable<Heroe> {
+    return this.http.put<Heroe>(`${this.baseUrl}/heroes/${heroe.id}`, heroe);
+  }
+  borrarHeroe(heroe: Heroe): Observable<any> {
+    return this.http.delete<Heroe>(`${this.baseUrl}/heroes/${heroe.id}`);
+  }
 }
